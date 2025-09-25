@@ -1,0 +1,54 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "taed2_smarthealth_ai"
+version = "0.0.1"
+description = "SmartHealth-AI is a project for the TAED2 course (UPC) that builds an AI tool to provide obesity-related guidance. Using health features and a decision tree model, it generates personalized recommendations to help users adopt healthier habits."
+authors = [
+  { name = "SmartHealth.AI" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License"
+]
+dependencies = [
+    "black",
+    "flake8",
+    "isort",
+    "loguru",
+    "numpy>=2.2.6",
+    "pandas>=2.3.2",
+    "pip",
+    "python-dotenv",
+    "tqdm",
+    "typer",
+]
+requires-python = "~=3.10.0"
+
+[tool.black]
+line-length = 99
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+known_first_party = ["taed2_smarthealth_ai"]
+force_sort_within_sections = true
+
+[dependency-groups]
+dev = [
+    "black>=25.9.0",
+    "pylint>=3.3.8",
+    "pytest>=8.4.2",
+]
+
+

@@ -17,6 +17,7 @@ classifiers = [
 ]
 dependencies = [
     "black",
+    "dvc>=3.63.0",
     "flake8",
     "isort",
     "loguru",

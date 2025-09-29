@@ -13,10 +13,38 @@ stages:
       size: 263646
     - path: params.yaml
       hash: md5
-      md5: e833a53b5edd14b772a08c54b4ef5c6f
-      size: 107
+      md5: d2b2b3be3959daef781fb5239ca88b76
+      size: 362
     outs:
     - path: data/interim/obesity_clean.csv
       hash: md5
       md5: f2bb6aec2a2cb99c0d207ba5b7bf8614
       size: 172106
+  split:
+    cmd: python data/split_obesity.py
+    deps:
+    - path: data/interim/obesity_clean.csv
+      hash: md5
+      md5: f2bb6aec2a2cb99c0d207ba5b7bf8614
+      size: 172106
+    - path: data/split_obesity.py
+      hash: md5
+      md5: 1209b1f5dab51ced6a047880e2112a5d
+      size: 1319
+    - path: params.yaml
+      hash: md5
+      md5: d2b2b3be3959daef781fb5239ca88b76
+      size: 362
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: d58bf855ed297b6335c83e25c67f4d81
+      size: 34510
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 4e07291e4a035b0bb1d544e251b6f7d6
+      size: 120869
+    - path: data/processed/validation.csv
+      hash: md5
+      md5: 761a4c20c7ae3c7bc60b2570fa834981
+      size: 17075

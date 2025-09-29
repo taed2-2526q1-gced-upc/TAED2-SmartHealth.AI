@@ -7,3 +7,13 @@ stages:
     - params.yaml
     outs:
     - data/interim/obesity_clean.csv
+  split:
+    cmd: python data/split_obesity.py
+    deps:
+    - data/interim/obesity_clean.csv
+    - data/split_obesity.py
+    - params.yaml
+    outs:
+    - data/processed/test.csv
+    - data/processed/train.csv
+    - data/processed/validation.csv

@@ -17,3 +17,15 @@ stages:
     - data/processed/test.csv
     - data/processed/train.csv
     - data/processed/validation.csv
+  train:
+    cmd: python models/train_obesity.py
+    deps:
+    - data/processed/train.csv
+    - data/processed/validation.csv
+    - models/train_obesity.py
+    - params.yaml
+    outs:
+    - models/obesity-clf
+    metrics:
+    - metrics.json:
+        cache: false

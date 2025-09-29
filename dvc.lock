@@ -13,8 +13,8 @@ stages:
       size: 263646
     - path: params.yaml
       hash: md5
-      md5: d2b2b3be3959daef781fb5239ca88b76
-      size: 362
+      md5: 85c1449021c2d37be4527079b6ab16be
+      size: 494
     outs:
     - path: data/interim/obesity_clean.csv
       hash: md5
@@ -33,8 +33,8 @@ stages:
       size: 1319
     - path: params.yaml
       hash: md5
-      md5: d2b2b3be3959daef781fb5239ca88b76
-      size: 362
+      md5: 85c1449021c2d37be4527079b6ab16be
+      size: 494
     outs:
     - path: data/processed/test.csv
       hash: md5
@@ -48,3 +48,32 @@ stages:
       hash: md5
       md5: 761a4c20c7ae3c7bc60b2570fa834981
       size: 17075
+  train:
+    cmd: python models/train_obesity.py
+    deps:
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 4e07291e4a035b0bb1d544e251b6f7d6
+      size: 120869
+    - path: data/processed/validation.csv
+      hash: md5
+      md5: 761a4c20c7ae3c7bc60b2570fa834981
+      size: 17075
+    - path: models/train_obesity.py
+      hash: md5
+      md5: 989f59188ec1211bf7e003fa7337ac56
+      size: 1250
+    - path: params.yaml
+      hash: md5
+      md5: 85c1449021c2d37be4527079b6ab16be
+      size: 494
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 61ba6231d61e5794432d87b22ac7a9c6
+      size: 81
+    - path: models/obesity-clf
+      hash: md5
+      md5: fba0fc1c1ff965791860361eda074eb2.dir
+      size: 15714465
+      nfiles: 1

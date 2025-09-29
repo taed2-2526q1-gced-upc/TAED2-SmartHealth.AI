@@ -1,0 +1,3 @@
+data:
+  raw: data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
+  interim: data/interim/obesity_clean.csv

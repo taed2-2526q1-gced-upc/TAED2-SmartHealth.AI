@@ -1,4 +1,5 @@
 [core]
     remote = origin
+    autostage = true
 ['remote "origin"']
     url = https://dagshub.com/RenauxNt/TAED2-SmartHealth.AI.dvc

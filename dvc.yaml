@@ -1,0 +1,9 @@
+stages:
+  preprocess:
+    cmd: python data/preprocess_obesity.py
+    deps:
+    - data/preprocess_obesity.py
+    - data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
+    - params.yaml
+    outs:
+    - data/interim/obesity_clean.csv

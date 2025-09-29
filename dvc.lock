@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python data/preprocess_obesity.py
+    deps:
+    - path: data/preprocess_obesity.py
+      hash: md5
+      md5: 6229bc878d4688ad7363f28cd8fc7bb8
+      size: 3439
+    - path: data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
+      hash: md5
+      md5: aff636fcccdf0a24ed7186e48bad2548
+      size: 263646
+    - path: params.yaml
+      hash: md5
+      md5: e833a53b5edd14b772a08c54b4ef5c6f
+      size: 107
+    outs:
+    - path: data/interim/obesity_clean.csv
+      hash: md5
+      md5: f2bb6aec2a2cb99c0d207ba5b7bf8614
+      size: 172106

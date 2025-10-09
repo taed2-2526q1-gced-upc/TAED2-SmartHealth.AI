@@ -16,7 +16,7 @@ def load_xy(fp: str):
     return X, y
 
 # data
-#from codecarbon import EmissionsTracker
+from codecarbon import EmissionsTracker
 
 #tracker = EmissionsTracker()
 #tracker.start()

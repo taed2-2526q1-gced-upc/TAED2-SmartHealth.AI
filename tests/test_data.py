@@ -5,6 +5,12 @@ from pathlib import Path
 
 
 
+import sys
+import os
+
+# Tilføj projektets rodmappe til Python-path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 # tests/test_data.py
 import great_expectations as gx
 from great_expectations import ValidationDefinition

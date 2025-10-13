@@ -55,3 +55,18 @@ tracker.stop()
 
 
 
+import dagshub
+import mlflow
+
+# Initialiser DagsHub som MLflow tracking server
+dagshub.init(repo_owner='RenauxNt', repo_name='TAED2-SmartHealth.AI', mlflow=True)
+
+# Start MLflow run
+with mlflow.start_run(run_name="obesity_model_training"):
+    # Log parametre og metrics
+    mlflow.log_param('learning_rate', 0.01)
+    mlflow.log_param('epochs', 50)
+    mlflow.log_metric('accuracy', 0.92)
+
+    # Her kan du også logge modellen, hvis du vil
+    # mlflow.sklearn.log_model(model, "model")

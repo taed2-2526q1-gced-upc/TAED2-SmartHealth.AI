@@ -12,7 +12,7 @@ def params():
 def pipe(params):
     model_path = params["train"]["model_dir"] + "/model.joblib"
     pipe = joblib.load(model_path)
-    # Hvis modellen ikke har feature_names_in_ (fx pga numpy input)
+    # Ensure feature_names_in_ is set for compatibility)
     if not hasattr(pipe, "feature_names_in_"):
         pipe.feature_names_in_ = np.array([
             'Gender','Age','Height','Weight',
@@ -32,17 +32,16 @@ def test_model_accuracy(pipe, test_ds, params):
     X = test_ds.drop(columns=[target])
     y = test_ds[target]
     acc = pipe.score(X, y)
-    assert acc > 0.85  # justér efter behov
+    assert acc > 0.85  # Threshold 
 
 @pytest.mark.parametrize("overrides", [
     {"Age": 23, "Gender": 1, "Height": 1.70, "Weight": 70},
     {"Age": 45, "Gender": 0, "Height": 1.60, "Weight": 90},
 ])
 def test_model_predictions(pipe, overrides):
-    # Byg et sample med alle features, men default=0
     features = list(pipe.feature_names_in_)
     sample = {f: 0 for f in features}
-    # sæt nogle rimelige defaults
+    # Make sure all features are set to reasonable defaults
     defaults = {
         "Age": 30, "Gender": 1, "Height": 1.70, "Weight": 70,
         "FCVC": 2.0, "CH2O": 2.0, "FAF": 1.0
@@ -50,7 +49,7 @@ def test_model_predictions(pipe, overrides):
     for k, v in defaults.items():
         if k in sample:
             sample[k] = v
-    # overskriv med det aktuelle test-case
+    # override with test case values
     for k, v in overrides.items():
         if k in sample:
             sample[k] = v

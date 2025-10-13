@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 import os
 
-# Tilføj projektets rodmappe til Python-path
+#  Add the project root to sys.path to ensure imports work correctly
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # tests/test_data.py
@@ -21,7 +21,7 @@ from pytest import fixture
 import sys
 from pathlib import Path
 
-# Find projektets rodmappe (to niveauer op fra denne fil)
+# Find project root directory (two levels up from this file)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 

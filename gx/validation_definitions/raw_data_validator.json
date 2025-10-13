@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "d2c26982-c312-4bca-82f1-db6a13f561e2",
+      "name": "raw_obesity_data"
+    },
+    "batch_definition": {
+      "id": "513dc0ac-28f1-4262-8643-b5998b875cf5",
+      "name": "raw_batch"
+    },
+    "datasource": {
+      "id": "65dc8b48-9a0d-40bf-81a9-1845d7140779",
+      "name": "pandas_obesity"
+    }
+  },
+  "id": "2ccbe06d-7fd2-407d-bb8e-17ec54dcdc54",
+  "name": "raw_data_validator",
+  "suite": {
+    "id": "d40b2565-ab70-4f07-91aa-b0868710947d",
+    "name": "obesity_data_suite"
+  }
+}

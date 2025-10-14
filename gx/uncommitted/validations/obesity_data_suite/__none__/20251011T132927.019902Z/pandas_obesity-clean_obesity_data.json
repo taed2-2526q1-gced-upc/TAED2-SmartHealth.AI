@@ -1,0 +1,131 @@
+{
+  "id": null,
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {},
+      "data_asset_name": "clean_obesity_data",
+      "data_connector_name": "fluent",
+      "datasource_name": "pandas_obesity"
+    },
+    "batch_markers": {
+      "ge_load_time": "20251011T132926.966380Z",
+      "pandas_data_fingerprint": "4318ef8a429dcecaaf82546eafb2047a"
+    },
+    "batch_parameters": null,
+    "batch_spec": {
+      "reader_method": "read_csv",
+      "reader_options": {
+        "filepath_or_buffer": "\\Users\\steff\\OneDrive\\Skrivebord\\DTU\\5. semester\\Data topic\\TAED2-SmartHealth.AI\\data\\interim\\obesity_clean.csv"
+      }
+    },
+    "checkpoint_id": null,
+    "great_expectations_version": "1.6.4",
+    "run_id": {
+      "run_name": null,
+      "run_time": "2025-10-11T15:29:27.019902+02:00"
+    },
+    "validation_id": "9b008cba-d40b-4e21-b425-bea4e73d44e6",
+    "validation_time": "2025-10-11T13:29:27.019902+00:00"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "e969a528-adda-4763-a783-e21a4472549d",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Gender",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "bbf7d61c-e97f-45a9-b411-2b8db07ff4f0",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Age",
+          "max_value": 120.0,
+          "min_value": 5.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "386e00f6-0a0a-4c18-9919-166d0bac1e20",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Height",
+          "max_value": 2.5,
+          "min_value": 1.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "8270b89a-9890-4ea8-98b6-efa1c064f37b",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Weight",
+          "max_value": 300.0,
+          "min_value": 30.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 4,
+    "success_percent": 100.0,
+    "successful_expectations": 4,
+    "unsuccessful_expectations": 0
+  },
+  "success": true,
+  "suite_name": "obesity_data_suite",
+  "suite_parameters": {}
+}

@@ -1,0 +1,151 @@
+{
+  "id": null,
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {},
+      "data_asset_name": "clean_obesity_data",
+      "data_connector_name": "fluent",
+      "datasource_name": "pandas_obesity"
+    },
+    "batch_markers": {
+      "ge_load_time": "20251011T130623.995477Z",
+      "pandas_data_fingerprint": "4318ef8a429dcecaaf82546eafb2047a"
+    },
+    "batch_parameters": null,
+    "batch_spec": {
+      "reader_method": "read_csv",
+      "reader_options": {
+        "filepath_or_buffer": "\\Users\\steff\\OneDrive\\Skrivebord\\DTU\\5. semester\\Data topic\\TAED2-SmartHealth.AI\\data\\interim\\obesity_clean.csv"
+      }
+    },
+    "checkpoint_id": null,
+    "great_expectations_version": "1.6.4",
+    "run_id": {
+      "run_name": null,
+      "run_time": "2025-10-11T15:06:24.104613+02:00"
+    },
+    "validation_id": "9b008cba-d40b-4e21-b425-bea4e73d44e6",
+    "validation_time": "2025-10-11T13:06:24.104613+00:00"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "c363021f-41e8-4ccf-9792-dbccc0b17f46",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Gender"
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_to_exist"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "fdf56dfe-d853-415f-924c-be3eb9558149",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Gender",
+          "value_set": [
+            "Male",
+            "Female"
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": false
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "4d8721fd-b568-4cfb-b274-40dc54a035e6",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Age",
+          "max_value": 120.0,
+          "min_value": 5.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "e5fdb966-aae7-405b-b28b-ac5402548155",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Height",
+          "max_value": 2.5,
+          "min_value": 1.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "aeb69189-b0c7-40ce-9bb0-3b71c4b1f03a",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Weight",
+          "max_value": 300.0,
+          "min_value": 30.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 5,
+    "success_percent": 80.0,
+    "successful_expectations": 4,
+    "unsuccessful_expectations": 1
+  },
+  "success": false,
+  "suite_name": "obesity_data_suite",
+  "suite_parameters": {}
+}

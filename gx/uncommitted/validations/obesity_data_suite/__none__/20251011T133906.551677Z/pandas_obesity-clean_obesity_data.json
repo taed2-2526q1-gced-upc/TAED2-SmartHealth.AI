@@ -1,0 +1,525 @@
+{
+  "id": null,
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {},
+      "data_asset_name": "clean_obesity_data",
+      "data_connector_name": "fluent",
+      "datasource_name": "pandas_obesity"
+    },
+    "batch_markers": {
+      "ge_load_time": "20251011T133906.406627Z",
+      "pandas_data_fingerprint": "4318ef8a429dcecaaf82546eafb2047a"
+    },
+    "batch_parameters": null,
+    "batch_spec": {
+      "reader_method": "read_csv",
+      "reader_options": {
+        "filepath_or_buffer": "\\Users\\steff\\OneDrive\\Skrivebord\\DTU\\5. semester\\Data topic\\TAED2-SmartHealth.AI\\data\\interim\\obesity_clean.csv"
+      }
+    },
+    "checkpoint_id": null,
+    "great_expectations_version": "1.6.4",
+    "run_id": {
+      "run_name": null,
+      "run_time": "2025-10-11T15:39:06.551677+02:00"
+    },
+    "validation_id": "9b008cba-d40b-4e21-b425-bea4e73d44e6",
+    "validation_time": "2025-10-11T13:39:06.551677+00:00"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "cba5ab95-1268-4f8c-8b01-b0c2dfc03e15",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Gender",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "47820795-aa26-4f1b-b95c-8c6a3e2e6b01",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Gender"
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_to_exist"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "c35c1858-a021-4b7f-bb48-2b4b587cf995",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Age",
+          "max_value": 120.0,
+          "min_value": 5.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "99d26ebe-d8b5-4a5a-9792-6ff4e5b8e1ea",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Height",
+          "max_value": 2.5,
+          "min_value": 1.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "5608a0b1-7036-470f-8935-e74416932073",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Weight",
+          "max_value": 300.0,
+          "min_value": 30.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "0dee3f6c-bfe4-48b7-9dac-ac02d6d7701d",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "family_history_with_overweight",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "5ffc169c-f9ec-4b51-80c4-848d65f6badf",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "FAVC",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "05e6b303-54a6-4ecb-b085-dad27405f62a",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "SMOKE",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "fb4ed869-8bb5-46fa-9551-684df3cae339",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "SCC",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "e9266a26-3c8b-467a-a766-8fb4bcbc0461",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "MTRANS_automobile",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "0622335d-c03b-427e-b021-5abcc4ef26a6",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "MTRANS_bike",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "2aa48365-809b-4452-bc20-060e67a0bc62",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "MTRANS_motorbike",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "6e8f909c-236c-42be-9f30-175963107d95",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "MTRANS_walking",
+          "value_set": [
+            0,
+            1
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "c7246135-d721-4b28-a3a8-ece445b1065e",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "FCVC",
+          "max_value": 3.0,
+          "min_value": 1.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "a4225183-b2ff-44e9-a533-3f68fc72c346",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "NCP",
+          "max_value": 4.0,
+          "min_value": 1.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "2c47923b-12c2-4a47-be13-e9783bde99d3",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "CAEC",
+          "max_value": 3.0,
+          "min_value": 0.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "5d301681-2b99-46dc-8c47-6f99a28c6d2d",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "CH2O",
+          "max_value": 3.0,
+          "min_value": 1.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "c9252bd8-c2b3-4fa0-8297-03105a06ec9e",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "FAF",
+          "max_value": 3.0,
+          "min_value": 0.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "d22d6a9c-3576-4ef0-a2e8-f3a2ab4c09d9",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "TUE",
+          "max_value": 2.0,
+          "min_value": 0.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "7ac68418-c6d1-4819-a568-c21b4161bf67",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "CALC",
+          "max_value": 3.0,
+          "min_value": 0.0
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_between"
+      },
+      "meta": {},
+      "result": {},
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "id": "b9c62bf5-cf9a-4586-9bfb-8aca3f235ca0",
+        "kwargs": {
+          "batch_id": "pandas_obesity-clean_obesity_data",
+          "column": "Obesity",
+          "value_set": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "meta": {},
+        "severity": "critical",
+        "type": "expect_column_values_to_be_in_set"
+      },
+      "meta": {},
+      "result": {},
+      "success": false
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 21,
+    "success_percent": 95.23809523809523,
+    "successful_expectations": 20,
+    "unsuccessful_expectations": 1
+  },
+  "success": false,
+  "suite_name": "obesity_data_suite",
+  "suite_parameters": {}
+}

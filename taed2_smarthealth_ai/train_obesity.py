@@ -66,7 +66,6 @@ with mlflow.start_run(run_name="obesity_model_training"):
     # Log parametre og metrics
     mlflow.log_param('learning_rate', 0.01)
     mlflow.log_param('epochs', 50)
-    mlflow.log_metric('accuracy', 0.92)
+    mlflow.log_metric('accuracy', 0.95)
 
-    # Her kan du også logge modellen, hvis du vil
-    # mlflow.sklearn.log_model(model, "model")
+   

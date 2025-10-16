@@ -1,0 +1,21 @@
+{
+  "Gender": 1,
+  "Age": 21.0,
+  "Height": 1.62,
+  "Weight": 64.0,
+  "family_history_with_overweight": 1,
+  "FAVC": 0,
+  "FCVC": 2.0,
+  "NCP": 3.0,
+  "CAEC": 1,
+  "SMOKE": 0,
+  "CH2O": 2.0,
+  "SCC": 0,
+  "FAF": 0.0,
+  "TUE": 1.0,
+  "CALC": 0,
+  "MTRANS_automobile": 0,
+  "MTRANS_bike": 0,
+  "MTRANS_motorbike": 0,
+  "MTRANS_walking": 0
+}

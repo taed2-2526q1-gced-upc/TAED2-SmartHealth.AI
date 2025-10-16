@@ -18,8 +18,10 @@ def load_xy(fp: str):
 # data
 from codecarbon import EmissionsTracker
 
-#tracker = EmissionsTracker()
-#tracker.start()
+tracker = EmissionsTracker()
+tracker.start()
+
+
 # Your training code here
 
 Xtr, ytr = load_xy(D["train"])
@@ -51,7 +53,7 @@ with open(T["metrics_out"], "w") as f:
 print("[train] saved model ->", model_dir / "model.joblib")
 print("[train] metrics ->", T["metrics_out"], metrics)
 
-#tracker.stop()
+tracker.stop()
 
 
 

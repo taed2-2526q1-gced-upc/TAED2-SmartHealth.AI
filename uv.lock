@@ -2,6 +2,12 @@ version = 1
 revision = 3
 requires-python = "==3.10.*"
 
+[manifest]
+members = [
+    "numbers",
+    "taed2-smarthealth-ai",
+]
+
 [[package]]
 name = "aiohappyeyeballs"
 version = "2.6.1"
@@ -1828,6 +1834,11 @@ sdist = { url = "https://files.pythonhosted.org/packages/fd/1d/06475e1cd5264c0b8
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b9/54/dd730b32ea14ea797530a4479b2ed46a6fb250f682a9cfb997e968bf0261/networkx-3.4.2-py3-none-any.whl", hash = "sha256:df5d4365b724cf81b8c6a7312509d0c22386097011ad1abe274afd5e9d3bbc5f", size = 1723263, upload-time = "2024-10-21T12:39:36.247Z" },
 ]
+
+[[package]]
+name = "numbers"
+version = "0.1.0"
+source = { editable = "numbers" }
 
 [[package]]
 name = "numpy"

@@ -46,17 +46,51 @@ metrics = {
     "val_f1_macro": float(f1_score(yva, pva, average="macro")),
 }
 
-# save artifacts
+
+# Ensure model dir exists
 model_dir = Path(T["model_dir"])
 model_dir.mkdir(parents=True, exist_ok=True)
-joblib.dump(clf, model_dir / "model.joblib")
 
-with open(T["metrics_out"], "w") as f:
+# 1) Save model
+model_path = model_dir / "model.joblib"
+joblib.dump(clf, model_path)
+
+# 2) Save feature order (critical for API input order)
+features_out = model_dir / "features.json"
+with open(features_out, "w", encoding="utf-8") as f:
+    json.dump({"feature_order": list(Xtr.columns)}, f, indent=2)
+
+# 3) Save classes (map model outputs to labels)
+classes_path = model_dir / "classes.json"
+with open(classes_path, "w", encoding="utf-8") as f:
+    json.dump({"classes": clf.classes_.tolist()}, f, indent=2)
+
+# 4) Save feature importances (if available)
+fi_path = model_dir / "feature_importances.json"
+try:
+    importances = clf.feature_importances_
+    fi = sorted(
+        [{"feature": feat, "importance": float(imp)} for feat, imp in zip(Xtr.columns, importances)],
+        key=lambda x: x["importance"],
+        reverse=True,
+    )
+    with open(fi_path, "w", encoding="utf-8") as f:
+        json.dump(fi, f, indent=2)
+except Exception:
+    pass  # OK if model doesn't expose importances
+
+# 5) Save metrics (ensure parent folder exists)
+metrics_out = Path(T["metrics_out"])
+metrics_out.parent.mkdir(parents=True, exist_ok=True)
+with open(metrics_out, "w", encoding="utf-8") as f:
     json.dump(metrics, f, indent=2)
 
-print("[train] saved model ->", model_dir / "model.joblib")
-print("[train] metrics ->", T["metrics_out"], metrics)
-
+# 6) Status logs
+print("[train] saved model     ->", model_path)
+print("[train] features order  ->", features_out)
+print("[train] classes         ->", classes_path)
+print("[train] feature imprt.  ->", fi_path)
+print("[train] metrics         ->", metrics_out, metrics)
 tracker.stop()
 
 

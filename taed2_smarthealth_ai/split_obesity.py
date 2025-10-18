@@ -1,5 +1,6 @@
 from pathlib import Path
-import pandas as pd, yaml
+import pandas as pd
+import yaml
 from sklearn.model_selection import train_test_split
 
 # Load params

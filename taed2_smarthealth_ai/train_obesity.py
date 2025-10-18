@@ -1,8 +1,14 @@
 from pathlib import Path
-import json, yaml, pandas as pd
+import json
+import yaml
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 import joblib
+import dagshub
+import mlflow
+from codecarbon import EmissionsTracker
+
 
 # load config
 params = yaml.safe_load(open("params.yaml", "r", encoding="utf-8"))
@@ -15,8 +21,7 @@ def load_xy(fp: str):
     X = df.drop(columns=[target])
     return X, y
 
-# data
-from codecarbon import EmissionsTracker
+
 
 tracker = EmissionsTracker()
 tracker.start()
@@ -42,7 +47,8 @@ metrics = {
 }
 
 # save artifacts
-model_dir = Path(T["model_dir"]); model_dir.mkdir(parents=True, exist_ok=True)
+model_dir = Path(T["model_dir"])
+model_dir.mkdir(parents=True, exist_ok=True)
 joblib.dump(clf, model_dir / "model.joblib")
 
 with open(T["metrics_out"], "w") as f:
@@ -55,8 +61,6 @@ tracker.stop()
 
 
 
-import dagshub
-import mlflow
 
 # Initialiser DagsHub som MLflow tracking server
 dagshub.init(repo_owner='RenauxNt', repo_name='TAED2-SmartHealth.AI', mlflow=True)

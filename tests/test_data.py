@@ -1,29 +1,14 @@
-
-
 from pathlib import Path
-
-
-
-
-import sys
-import os
-
-#  Add the project root to sys.path to ensure imports work correctly
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-# tests/test_data.py
 import great_expectations as gx
 from great_expectations import ValidationDefinition
+from pytest import fixture
+import sys
 from data.processed.config import ROOT_DIR
 from data.processed.gx_context_configuration import CLEAN_DATA_VALIDATOR
-from pytest import fixture
 
-import sys
-from pathlib import Path
-
-# Find project root directory (two levels up from this file)
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
 
 
 @fixture

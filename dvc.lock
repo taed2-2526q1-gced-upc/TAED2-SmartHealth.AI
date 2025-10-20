@@ -1,12 +1,8 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python data/preprocess_obesity.py
+    cmd: python taed2_smarthealth_ai/preprocess_obesity.py
     deps:
-    - path: data/preprocess_obesity.py
-      hash: md5
-      md5: 6229bc878d4688ad7363f28cd8fc7bb8
-      size: 3439
     - path: data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
       hash: md5
       md5: aff636fcccdf0a24ed7186e48bad2548
@@ -15,26 +11,30 @@ stages:
       hash: md5
       md5: 85c1449021c2d37be4527079b6ab16be
       size: 494
+    - path: taed2_smarthealth_ai/preprocess_obesity.py
+      hash: md5
+      md5: edb79c5f992df338f2c2bcb453b40772
+      size: 4639
     outs:
     - path: data/interim/obesity_clean.csv
       hash: md5
       md5: f2bb6aec2a2cb99c0d207ba5b7bf8614
       size: 172106
   split:
-    cmd: python data/split_obesity.py
+    cmd: python taed2_smarthealth_ai/split_obesity.py
     deps:
     - path: data/interim/obesity_clean.csv
       hash: md5
       md5: f2bb6aec2a2cb99c0d207ba5b7bf8614
       size: 172106
-    - path: data/split_obesity.py
-      hash: md5
-      md5: 1209b1f5dab51ced6a047880e2112a5d
-      size: 1319
     - path: params.yaml
       hash: md5
       md5: 85c1449021c2d37be4527079b6ab16be
       size: 494
+    - path: taed2_smarthealth_ai/split_obesity.py
+      hash: md5
+      md5: f0e6f2dda3a9cf5fbaf78e4bbb0c704d
+      size: 1326
     outs:
     - path: data/processed/test.csv
       hash: md5
@@ -49,7 +49,7 @@ stages:
       md5: 761a4c20c7ae3c7bc60b2570fa834981
       size: 17075
   train:
-    cmd: python models/train_obesity.py
+    cmd: python taed2_smarthealth_ai/train_obesity.py
     deps:
     - path: data/processed/train.csv
       hash: md5
@@ -59,14 +59,14 @@ stages:
       hash: md5
       md5: 761a4c20c7ae3c7bc60b2570fa834981
       size: 17075
-    - path: models/train_obesity.py
-      hash: md5
-      md5: 1ccf47eb024c54a3d7c54f96c9eaacc2
-      size: 1387
     - path: params.yaml
       hash: md5
       md5: 85c1449021c2d37be4527079b6ab16be
       size: 494
+    - path: taed2_smarthealth_ai/train_obesity.py
+      hash: md5
+      md5: fa40c155ea5b9eb757d1f877b2f2ac6c
+      size: 3203
     outs:
     - path: metrics.json
       hash: md5
@@ -74,6 +74,6 @@ stages:
       size: 81
     - path: models/obesity-clf
       hash: md5
-      md5: 3f31a8dc89b0580c03cef4462d6765e2.dir
-      size: 15714593
-      nfiles: 1
+      md5: d6622a14db875af25d8e01e76b96ec46.dir
+      size: 15716377
+      nfiles: 4

@@ -17,8 +17,12 @@ classifiers = [
 ]
 dependencies = [
     "black",
+    "codecarbon>=3.0.7",
+    "dagshub>=0.6.3",
     "dvc>=3.63.0",
+    "fastapi>=0.118.0",
     "flake8",
+    "google-generativeai>=0.8.5",
     "great-expectations>=1.7.0",
     "ipykernel>=6.30.1",
     "isort",
@@ -31,6 +35,7 @@ dependencies = [
     "scikit-learn>=1.7.2",
     "tqdm",
     "typer",
+    "uvicorn[standard]>=0.37.0",
 ]
 requires-python = "~=3.10.0"
 

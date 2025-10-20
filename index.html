@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHealth-AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        input[type="number"], select {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+
+        .result h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .prediction {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .prediction-label {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .confidence {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .advice-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .advice-list li {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .note {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 8px;
+            color: #856404;
+            font-style: italic;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 5px solid #f5c6cb;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .probabilities {
+            margin-top: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .prob-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .prob-item:last-child {
+            border-bottom: none;
+        }
+
+        .prob-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .prob-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 SmartHealth-AI</h1>
+            <p>AI-Powered Health Assessment & Personalized Advice</p>
+        </div>
+        
+        <div class="content">
+            <form id="healthForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="Gender">Sex</label>
+                        <select id="Gender" required>
+                            <option value="">Select...</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Age">Age (years)</label>
+                        <input type="number" id="Age" step="1" min="1" placeholder="e.g., 25" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Height">Height (meters)</label>
+                        <input type="number" id="Height" step="0.01" min="0.01" placeholder="e.g., 1.75" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Weight">Weight (kg)</label>
+                        <input type="number" id="Weight" step="0.1" min="0.1" placeholder="e.g., 70" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="family_history_with_overweight">Family History of Overweight</label>
+                        <select id="family_history_with_overweight" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FAVC">Frequent High-Calorie Food</label>
+                        <select id="FAVC" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FCVC">Vegetable Consumption Frequency</label>
+                        <select id="FCVC" required>
+                            <option value="">Select...</option>
+                            <option value="1">Never</option>
+                            <option value="2">Sometimes</option>
+                            <option value="3">Always</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NCP">Number of Main Meals per Day</label>
+                        <select id="NCP" required>
+                            <option value="">Select...</option>
+                            <option value="1">1 meal</option>
+                            <option value="2">2 meals</option>
+                            <option value="3">3 meals</option>
+                            <option value="4">4+ meals</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="CAEC">Food Between Meals</label>
+                        <select id="CAEC" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Sometimes</option>
+                            <option value="2">Frequently</option>
+                            <option value="3">Always</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="SMOKE">Do You Smoke?</label>
+                        <select id="SMOKE" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="CH2O">How many liters of water do you drink per day?</label>
+                        <select id="CH2O" required>
+                            <option value="">Select...</option>
+                            <option value="1">Less than 1L</option>
+                            <option value="2">1-2L</option>
+                            <option value="3">More than 2L</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="SCC">Do You Monitor Your Calorie Intake?</label>
+                        <select id="SCC" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FAF">Physical Activity Frequency (per week)</label>
+                        <select id="FAF" required>
+                            <option value="">Select...</option>
+                            <option value="0">None</option>
+                            <option value="1">1-2 days</option>
+                            <option value="2">2-4 days</option>
+                            <option value="3">4-5 days</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="TUE">Time Using Technology (hours/day)</label>
+                        <select id="TUE" required>
+                            <option value="">Select...</option>
+                            <option value="0">0-2 hours</option>
+                            <option value="1">3-5 hours</option>
+                            <option value="2">More than 5 hours</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="CALC">Alcohol Consumption</label>
+                        <select id="CALC" required>
+                            <option value="">Select...</option>
+                            <option value="0">Never</option>
+                            <option value="1">Sometimes</option>
+                            <option value="2">Frequently</option>
+                            <option value="3">Always</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transport">Main Transportation</label>
+                        <select id="transport" required>
+                            <option value="">Select...</option>
+                            <option value="automobile">Automobile</option>
+                            <option value="bike">Bike</option>
+                            <option value="motorbike">Motorbike</option>
+                            <option value="public">Public Transport</option>
+                            <option value="walking">Walking</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">Get Assessment</button>
+            </form>
+
+            <div id="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+
+        // Map numeric labels to readable names
+        const LABEL_NAMES = {
+            '0': 'Insufficient Weight',
+            '1': 'Normal Weight',
+            '2': 'Overweight Level I',
+            '3': 'Overweight Level II',
+            '4': 'Obesity Type I',
+            '5': 'Obesity Type II',
+            '6': 'Obesity Type III'
+        };
+
+        // Store current prediction data for advice generation
+        let currentPredictionData = null;
+
+        function getReadableLabel(label) {
+            // Handle both numeric and string labels
+            const labelStr = String(label);
+            return LABEL_NAMES[labelStr] || label;
+        }
+
+        document.getElementById('healthForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const resultDiv = document.getElementById('result');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            resultDiv.innerHTML = '<div class="loading">⏳ Analyzing your data...</div>';
+            resultDiv.style.display = 'block';
+
+            const transport = document.getElementById('transport').value;
+            const transportData = {
+                MTRANS_automobile: transport === 'automobile' ? 1 : 0,
+                MTRANS_bike: transport === 'bike' ? 1 : 0,
+                MTRANS_motorbike: transport === 'motorbike' ? 1 : 0,
+                MTRANS_walking: transport === 'walking' ? 1 : 0
+            };
+
+            const data = {
+                Gender: parseInt(document.getElementById('Gender').value),
+                Age: parseFloat(document.getElementById('Age').value),
+                Height: parseFloat(document.getElementById('Height').value),
+                Weight: parseFloat(document.getElementById('Weight').value),
+                family_history_with_overweight: parseInt(document.getElementById('family_history_with_overweight').value),
+                FAVC: parseInt(document.getElementById('FAVC').value),
+                FCVC: parseFloat(document.getElementById('FCVC').value),
+                NCP: parseFloat(document.getElementById('NCP').value),
+                CAEC: parseInt(document.getElementById('CAEC').value),
+                SMOKE: parseInt(document.getElementById('SMOKE').value),
+                CH2O: parseFloat(document.getElementById('CH2O').value),
+                SCC: parseInt(document.getElementById('SCC').value),
+                FAF: parseFloat(document.getElementById('FAF').value),
+                TUE: parseFloat(document.getElementById('TUE').value),
+                CALC: parseInt(document.getElementById('CALC').value),
+                ...transportData
+            };
+
+            try {
+                // Stage 1: Get prediction from ML model
+                const predResponse = await fetch(`${API_URL}/predict`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!predResponse.ok) {
+                    const errorData = await predResponse.json();
+                    throw new Error(`Prediction error: ${errorData.detail || predResponse.statusText}`);
+                }
+
+                const result = await predResponse.json();
+                console.log('Stage 1 - Prediction received:', result);
+                
+                // Store data for later advice generation
+                currentPredictionData = {
+                    user_inputs: data,
+                    prediction: {
+                        label: result.label,
+                        confidence: result.confidence
+                    }
+                };
+                
+                // Display prediction without advice
+                displayResult(result, false);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <strong>⚠️ Error:</strong> ${error.message}<br>
+                        Make sure your API is running on ${API_URL}<br>
+                        Check the browser console (F12) for more details.
+                    </div>
+                `;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get Assessment';
+            }
+        });
+
+        async function generateAdvice() {
+            if (!currentPredictionData) {
+                alert('Please get a prediction first!');
+                return;
+            }
+
+            const adviceBtn = document.getElementById('generateAdviceBtn');
+            const adviceContainer = document.getElementById('adviceContainer');
+            
+            adviceBtn.disabled = true;
+            adviceBtn.textContent = 'Generating...';
+            adviceContainer.innerHTML = '<div class="loading">⏳ Generating personalized advice with AI...</div>';
+            
+            try {
+                const adviceResponse = await fetch(`${API_URL}/generate-advice`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(currentPredictionData)
+                });
+
+                if (adviceResponse.ok) {
+                    const adviceData = await adviceResponse.json();
+                    console.log('Stage 2 - Advice received:', adviceData);
+                    displayAdvice(adviceData);
+                    adviceBtn.style.display = 'none'; // Hide button after advice is generated
+                } else {
+                    const errorData = await adviceResponse.json();
+                    console.error('Failed to generate advice:', errorData);
+                    adviceContainer.innerHTML = `
+                        <div class="note" style="background: #f8d7da; color: #721c24;">
+                            ⚠️ Advice generation failed: ${errorData.detail || 'Unknown error'}
+                        </div>
+                    `;
+                    adviceBtn.disabled = false;
+                    adviceBtn.textContent = 'Try Again';
+                }
+            } catch (error) {
+                console.error('Error generating advice:', error);
+                adviceContainer.innerHTML = `
+                    <div class="note" style="background: #f8d7da; color: #721c24;">
+                        ⚠️ Error: ${error.message}
+                    </div>
+                `;
+                adviceBtn.disabled = false;
+                adviceBtn.textContent = 'Try Again';
+            }
+        }
+
+        function displayResult(result, includeAdvice = false) {
+            const resultDiv = document.getElementById('result');
+            
+            // Transform label to readable name
+            const readableLabel = getReadableLabel(result.label);
+            
+            let probsHtml = '';
+            if (result.probabilities) {
+                probsHtml = '<div class="probabilities"><h4>Probability Distribution:</h4>';
+                for (const [label, prob] of Object.entries(result.probabilities)) {
+                    const percentage = (prob * 100).toFixed(1);
+                    const readableProbLabel = getReadableLabel(label);
+                    probsHtml += `
+                        <div class="prob-item">
+                            <span>${readableProbLabel}</span>
+                            <span><strong>${percentage}%</strong></span>
+                        </div>
+                        <div class="prob-bar">
+                            <div class="prob-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    `;
+                }
+                probsHtml += '</div>';
+            }
+
+            resultDiv.innerHTML = `
+                <div class="result">
+                    <h3>✅ Assessment Results</h3>
+                    <div class="prediction">
+                        <div class="prediction-label">Category: ${readableLabel}</div>
+                        <div class="confidence">Confidence: ${(result.confidence * 100).toFixed(1)}%</div>
+                    </div>
+                    ${probsHtml}
+                    <button onclick="generateAdvice()" class="btn-secondary" id="generateAdviceBtn">
+                        🤖 Generate Personalized Advice with AI
+                    </button>
+                    <div id="adviceContainer"></div>
+                </div>
+            `;
+        }
+
+        function displayAdvice(adviceData) {
+            const adviceContainer = document.getElementById('adviceContainer');
+            
+            let adviceHtml = '';
+            if (adviceData && adviceData.advice && adviceData.advice.length > 0) {
+                adviceHtml = `
+                    <h4 style="margin-top: 20px;">📋 Personalized Recommendations:</h4>
+                    <ul class="advice-list">
+                        ${adviceData.advice.map(tip => `<li>💡 ${tip}</li>`).join('')}
+                    </ul>
+                    <div class="note">
+                        ℹ️ ${adviceData.note}
+                    </div>
+                `;
+            } else if (adviceData && adviceData.note) {
+                adviceHtml = `
+                    <div class="note">
+                        ⚠️ ${adviceData.note}
+                    </div>
+                `;
+            }
+            
+            adviceContainer.innerHTML = adviceHtml;
+        }
+    </script>
+</body>
+</html>

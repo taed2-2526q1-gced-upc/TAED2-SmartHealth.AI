@@ -2,7 +2,6 @@
 from pathlib import Path
 import sys
 import joblib
-import numpy as np
 import pandas as pd
 import pytest
 import yaml

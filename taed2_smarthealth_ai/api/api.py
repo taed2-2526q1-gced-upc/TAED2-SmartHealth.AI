@@ -106,7 +106,7 @@ def predict(
             "MTRANS_automobile": 0,
             "MTRANS_bike": 0,
             "MTRANS_motorbike": 0,
-            "MTRANS_walking": 0,
+            "MTRANS_walking": 0
         },
     )
 ):

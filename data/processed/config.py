@@ -44,14 +44,14 @@ TRAIN_SPLIT = 0.7
 VALIDATION_SPLIT = 0.2
 TEST_SPLIT = 0.1
 
-
+"""
 HF_TOKEN = os.getenv("HF_TOKEN")
 if HF_TOKEN is None:
     logger.error("HF_TOKEN environment variable not set. Please set it in your .env file.")
     raise ValueError(
         "HF_TOKEN environment variable is not set in .env file. Use dot-env-template file to create .env file."
     )
-
+"""
 # If tqdm is installed, configure loguru with tqdm.write
 
 # https://github.com/Delgan/loguru/issues/135

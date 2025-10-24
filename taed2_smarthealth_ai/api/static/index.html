@@ -408,7 +408,45 @@
     </div>
 
     <script>
-        const API_URL = 'http://localhost:8000';
+        // Auto-detect API port
+        const POSSIBLE_PORTS = [5000, 8000, 8080, 3000];
+        let API_URL = null;
+
+        // Find which port the API is running on
+        async function findAPIPort() {
+            for (const port of POSSIBLE_PORTS) {
+                try {
+                    const response = await fetch(`http://localhost:${port}/healthz`, {
+                        method: 'GET',
+                        signal: AbortSignal.timeout(1000) // 1 second timeout
+                    });
+                    if (response.ok) {
+                        API_URL = `http://localhost:${port}`;
+                        console.log(`✅ API found on port ${port}`);
+                        return true;
+                    }
+                } catch (e) {
+                    // Port not responding, try next
+                }
+            }
+            return false;
+        }
+
+        // Initialize API connection on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            const found = await findAPIPort();
+            if (!found) {
+                document.getElementById('result').innerHTML = `
+                    <div class="error" style="display: block;">
+                        <strong>⚠️ API Not Found</strong><br>
+                        Could not connect to API on ports: ${POSSIBLE_PORTS.join(', ')}<br>
+                        Make sure your API is running with:<br>
+                        <code>uv run uvicorn taed2_smarthealth_ai.api.api:app --reload</code>
+                    </div>
+                `;
+                document.getElementById('submitBtn').disabled = true;
+            }
+        });
 
         // Map numeric labels to readable names
         const LABEL_NAMES = {
@@ -421,14 +459,13 @@
             '6': 'Obesity Type III'
         };
 
-        // Store current prediction data for advice generation
-        let currentPredictionData = null;
-
         function getReadableLabel(label) {
-            // Handle both numeric and string labels
             const labelStr = String(label);
             return LABEL_NAMES[labelStr] || label;
         }
+
+        // Store current prediction data for advice generation
+        let currentPredictionData = null;
 
         document.getElementById('healthForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -566,7 +603,7 @@
         function displayResult(result, includeAdvice = false) {
             const resultDiv = document.getElementById('result');
             
-            // Transform label to readable name
+            // Convert numeric label to readable name
             const readableLabel = getReadableLabel(result.label);
             
             let probsHtml = '';

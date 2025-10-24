@@ -1,9 +1,10 @@
+from pathlib import Path
 import sys
+
 import numpy as np
 import pandas as pd
-from pathlib import Path
-from taed2_smarthealth_ai.data.preprocess_obesity import norm, warn_unmapped
 
+from taed2_smarthealth_ai.data.preprocess_obesity import norm, warn_unmapped
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -14,11 +15,13 @@ def test_norm_trims_and_lowercases():
     out = norm(s)
     assert list(out) == ["female", "male", pd.NA]
 
+
 def test_norm_nfkc_normalizes():
     s = pd.Series(["ＦＥＭＡＬＥ", "Ｐｕｂｌｉｃ＿Ｔｒａｎｓｐｏｒｔａｔｉｏｎ"])
     out = norm(s)
     assert out.iloc[0] == "female"
     assert out.iloc[1] == "public_transportation"
+
 
 def test_warn_unmapped_prints_only_unmapped(capsys):
     s = pd.Series(["yes", "no", "maybe", np.nan])
@@ -29,6 +32,7 @@ def test_warn_unmapped_prints_only_unmapped(capsys):
     assert "maybe" in captured
     assert "yes" not in captured
     assert "no" not in captured
+
 
 def test_warn_unmapped_no_output_when_all_valid(capsys):
     s = pd.Series(["yes", "no", None])

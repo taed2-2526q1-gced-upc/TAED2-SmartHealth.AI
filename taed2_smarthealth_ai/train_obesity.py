@@ -1,19 +1,23 @@
-from pathlib import Path
 import json
-import yaml
+from pathlib import Path
+
+from codecarbon import EmissionsTracker
+import dagshub
+import joblib
+import mlflow
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
-import joblib
-import dagshub
-import mlflow
-from codecarbon import EmissionsTracker
+import yaml
 
+REPORTS_DIR = Path("reports")
+METRICS_PATH = REPORTS_DIR / "metrics.json"  # reports/metrics.json
 
 # load config
 params = yaml.safe_load(open("params.yaml", "r", encoding="utf-8"))
 D, S, T = params["data"], params["split"], params["train"]
 target = S["target"]
+
 
 def load_xy(fp: str):
     df = pd.read_csv(fp)
@@ -22,10 +26,15 @@ def load_xy(fp: str):
     return X, y
 
 
-
-tracker = EmissionsTracker()
+tracker = EmissionsTracker(
+    output_dir=str(REPORTS_DIR),
+    output_file="emissions.csv",
+    save_to_file=True,
+    gpu_ids=[],  # disable GPU detection
+    measure_power_secs=0.1,
+)
 tracker.start()
-# Your training code here
+# training code starts here
 
 Xtr, ytr = load_xy(D["train"])
 Xva, yva = load_xy(D["validation"])
@@ -70,7 +79,10 @@ fi_path = model_dir / "feature_importances.json"
 try:
     importances = clf.feature_importances_
     fi = sorted(
-        [{"feature": feat, "importance": float(imp)} for feat, imp in zip(Xtr.columns, importances)],
+        [
+            {"feature": feat, "importance": float(imp)}
+            for feat, imp in zip(Xtr.columns, importances)
+        ],
         key=lambda x: x["importance"],
         reverse=True,
     )
@@ -80,29 +92,46 @@ except Exception:
     pass  # OK if model doesn't expose importances
 
 # 5) Save metrics (ensure parent folder exists)
-metrics_out = Path(T["metrics_out"])
-metrics_out.parent.mkdir(parents=True, exist_ok=True)
-with open(metrics_out, "w", encoding="utf-8") as f:
-    json.dump(metrics, f, indent=2)
+with open(METRICS_PATH, "w", encoding="utf-8") as f:
+    json.dump(metrics, f, indent=4)
 
 # 6) Status logs
 print("[train] saved model     ->", model_path)
 print("[train] features order  ->", features_out)
 print("[train] classes         ->", classes_path)
 print("[train] feature imprt.  ->", fi_path)
-print("[train] metrics         ->", metrics_out, metrics)
+print("metrics                  → ", METRICS_PATH)
+print("emissions                → ", REPORTS_DIR / "emissions.csv")
 tracker.stop()
 
+# ML Flow tracking via DagsHub
+dagshub.init(
+    repo_owner="RenauxNt",
+    repo_name="TAED2-SmartHealth.AI",
+    mlflow=True,
+)
 
-# Initialiser DagsHub som MLflow tracking server
-dagshub.init(repo_owner='RenauxNt', repo_name='TAED2-SmartHealth.AI', mlflow=True)
+with mlflow.start_run(run_name="rf_train_eval"):
+    mlflow.log_params(
+        {
+            "model_type": "RandomForestClassifier",
+            "n_estimators": T["n_estimators"],
+            "max_depth": T["max_depth"],
+            "random_state": T["random_state"],
+            "n_features": Xtr.shape[1],
+            "target": target,
+            "train_rows": Xtr.shape[0],
+            "val_rows": Xva.shape[0],
+        }
+    )
 
-# Start MLflow run
-with mlflow.start_run(run_name="obesity_model_training"):
-    # Log parametre og metrics
-    mlflow.log_param('learning_rate', 0.01)
-    mlflow.log_param('epochs', 50)
-    mlflow.log_metric('accuracy', 0.92)
+    # Metrics
+    mlflow.log_metrics(metrics)
 
-    # Her kan du også logge modellen, hvis du vil
-    # mlflow.sklearn.log_model(model, "model")
+    # Artifacts
+    mlflow.log_artifact(str(METRICS_PATH), artifact_path="reports")
+    mlflow.log_artifact(str(REPORTS_DIR / "emissions.csv"), artifact_path="reports")
+    mlflow.log_artifact(str(features_out), artifact_path="model_assets")
+    mlflow.log_artifact(str(classes_path), artifact_path="model_assets")
+    if fi_path and fi_path.exists():
+        mlflow.log_artifact(str(fi_path), artifact_path="model_assets")

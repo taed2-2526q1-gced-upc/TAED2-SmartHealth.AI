@@ -1,8 +1,8 @@
 import json
 from types import SimpleNamespace
 
-import pytest
 from fastapi.testclient import TestClient
+import pytest
 
 # Importér modulet, så vi kan ændre modulvariabler (fx GOOGLE_API_KEY)
 from taed2_smarthealth_ai.api import api as api_module
@@ -115,9 +115,9 @@ def test_predict_with_advice_monkeypatched_llm(monkeypatch):
             fake_json = {
                 "advice": [
                     "Walk 30 minutes 3 times a week.",
-                    "Increase vegetables at lunch and dinner."
+                    "Increase vegetables at lunch and dinner.",
                 ],
-                "note": "These are AI-generated suggestions based on your answers to the form. Please consult with healthcare professionals for personalized medical advice."
+                "note": "These are AI-generated suggestions based on your answers to the form. Please consult with healthcare professionals for personalized medical advice.",
             }
             return SimpleNamespace(text=json.dumps(fake_json))
 

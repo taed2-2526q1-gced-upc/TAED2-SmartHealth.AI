@@ -1,8 +1,8 @@
 import great_expectations as gx
 from loguru import logger
 
-from taed2_smarthealth_ai.data.config import ROOT_DIR
 from data.processed.gx_context_configuration import CHECKPOINT
+from taed2_smarthealth_ai.data.config import ROOT_DIR
 
 context = gx.get_context(mode="file", project_root_dir=ROOT_DIR)
 
@@ -14,4 +14,6 @@ validation_result = checkpoint_result.run_results[list(checkpoint_result.run_res
 expectations_run = validation_result["statistics"]["evaluated_expectations"]
 expectations_failed = validation_result["statistics"]["unsuccessful_expectations"]
 
-logger.info(f"Validation results: {expectations_run} expectations evaluated, {expectations_failed} failed.")
+logger.info(
+    f"Validation results: {expectations_run} expectations evaluated, {expectations_failed} failed."
+)

@@ -1,14 +1,16 @@
-import yaml
+from pathlib import Path
 import sys
+
 import numpy as np
 import pandas as pd
-from pathlib import Path
+import yaml
 
 
 # ---- functions to test ----
 def norm(s: pd.Series) -> pd.Series:
     """Normalize Unicode (NFKC), strip spaces, lowercase, keep NaN."""
     return s.astype("string").str.normalize("NFKC").str.strip().str.lower()
+
 
 def warn_unmapped(series: pd.Series, used_keys, colname: str):
     """Print warning if any non-NA values not in used_keys."""
@@ -23,11 +25,13 @@ def test_norm_trims_and_lowercases():
     out = norm(s)
     assert list(out) == ["female", "male", pd.NA]
 
+
 def test_norm_nfkc_normalizes():
     s = pd.Series(["ＦＥＭＡＬＥ", "Ｐｕｂｌｉｃ＿Ｔｒａｎｓｐｏｒｔａｔｉｏｎ"])
     out = norm(s)
     assert out.iloc[0] == "female"
     assert out.iloc[1] == "public_transportation"
+
 
 def test_warn_unmapped_prints_only_unmapped(capsys):
     s = pd.Series(["yes", "no", "maybe", np.nan])
@@ -39,39 +43,54 @@ def test_warn_unmapped_prints_only_unmapped(capsys):
     assert "yes" not in captured
     assert "no" not in captured
 
+
 def test_warn_unmapped_no_output_when_all_valid(capsys):
     s = pd.Series(["yes", "no", None])
     warn_unmapped(norm(s), used_keys={"yes", "no"}, colname="FAVC")
     assert capsys.readouterr().out == ""
 
+
 def main():
     # DVC runs from repo root → read params.yaml from CWD
     params = yaml.safe_load(open("params.yaml", "r", encoding="utf-8"))
 
-    RAW = Path(params["data"]["raw"])          # e.g., data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
-    OUT = Path(params["data"]["interim"])      # e.g., data/interim/obesity_clean.csv
+    RAW = Path(params["data"]["raw"])  # e.g., data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
+    OUT = Path(params["data"]["interim"])  # e.g., data/interim/obesity_clean.csv
     OUT.parent.mkdir(parents=True, exist_ok=True)
 
     # --- load ---
     data = pd.read_csv(RAW)
 
     # --- normalize relevant text cols (avoid NaNs from case/space mismatches) ---
-    for col in ["CAEC","CALC","Gender","NObeyesdad",
-                "family_history_with_overweight","FAVC","SMOKE","SCC","MTRANS"]:
+    for col in [
+        "CAEC",
+        "CALC",
+        "Gender",
+        "NObeyesdad",
+        "family_history_with_overweight",
+        "FAVC",
+        "SMOKE",
+        "SCC",
+        "MTRANS",
+    ]:
         if col in data.columns:
             data[col] = norm(data[col])
 
     # --- mappings  ---
-    caec_calc_mapping = {'no':0, 'sometimes':1, 'frequently':2, 'always':3}
+    caec_calc_mapping = {"no": 0, "sometimes": 1, "frequently": 2, "always": 3}
     obesity_mapping = {
-        "insufficient_weight":0, "normal_weight":1,
-        "overweight_level_i":2, "overweight_level_ii":3,
-        "obesity_type_i":4, "obesity_type_ii":5, "obesity_type_iii":6
+        "insufficient_weight": 0,
+        "normal_weight": 1,
+        "overweight_level_i": 2,
+        "overweight_level_ii": 3,
+        "obesity_type_i": 4,
+        "obesity_type_ii": 5,
+        "obesity_type_iii": 6,
     }
-    gender_mapping = {"male":0, "female":1}
-    binary_mapping = {"yes":1, "no":0}
+    gender_mapping = {"male": 0, "female": 1}
+    binary_mapping = {"yes": 1, "no": 0}
 
-    for col in ["CAEC","CALC"]:
+    for col in ["CAEC", "CALC"]:
         if col in data.columns:
             warn_unmapped(data[col], caec_calc_mapping.keys(), col)
             data[col] = data[col].map(caec_calc_mapping).astype("Int64")
@@ -84,7 +103,7 @@ def main():
         warn_unmapped(data["Gender"], gender_mapping.keys(), "Gender")
         data["Gender"] = data["Gender"].map(gender_mapping).astype("Int64")
 
-    for col in ['family_history_with_overweight','FAVC','SMOKE','SCC']:
+    for col in ["family_history_with_overweight", "FAVC", "SMOKE", "SCC"]:
         if col in data.columns:
             warn_unmapped(data[col], binary_mapping.keys(), col)
             data[col] = data[col].map(binary_mapping).astype("Int64")
@@ -110,6 +129,7 @@ def main():
 
     print(f"[preprocess] raw -> {RAW}")
     print(f"[preprocess] cleaned -> {OUT}")
+
 
 if __name__ == "__main__":
     try:

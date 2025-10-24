@@ -1,7 +1,9 @@
-from pathlib import Path
-import pandas as pd
-from taed2_smarthealth_ai.preprocess_obesity import norm, warn_unmapped
 import sys
+import numpy as np
+import pandas as pd
+from pathlib import Path
+from taed2_smarthealth_ai.data.preprocess_obesity import norm, warn_unmapped
+
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))

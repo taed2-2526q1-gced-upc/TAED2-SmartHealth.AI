@@ -1,10 +1,8 @@
-import pandas as pd
 import yaml
 import sys
-from pathlib import Path
-
-
 import numpy as np
+import pandas as pd
+from pathlib import Path
 
 
 # ---- functions to test ----
@@ -20,7 +18,6 @@ def warn_unmapped(series: pd.Series, used_keys, colname: str):
 
 
 # ---- pytest tests ----
-
 def test_norm_trims_and_lowercases():
     s = pd.Series(["  Female ", "MALE", None])
     out = norm(s)

@@ -1,7 +1,7 @@
 {
   "expectations": [
     {
-      "id": "c4faebe6-ec28-4ac6-bc1a-c7d98023c743",
+      "id": "36cefb6a-4e79-473f-8ea0-ca50c8195c93",
       "kwargs": {
         "column": "Gender",
         "value_set": [
@@ -14,7 +14,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "28623659-dcc7-4fbf-bd20-77112d9fcd6c",
+      "id": "d6b14228-013c-4854-bc2a-67d5d30d55d9",
       "kwargs": {
         "column": "Age",
         "max_value": 120.0,
@@ -25,7 +25,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "aeca7d2c-1681-489f-89e7-a83d40edb044",
+      "id": "edb5dee4-1ad5-40de-af1b-444b71c9790f",
       "kwargs": {
         "column": "Height",
         "max_value": 2.5,
@@ -36,7 +36,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "a83245d9-44f0-4a59-b255-0d6f74dceed6",
+      "id": "825434db-4c35-4d24-b4b3-7ced9f9f2502",
       "kwargs": {
         "column": "Weight",
         "max_value": 300.0,
@@ -47,16 +47,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "fbafb12e-cbef-469e-b72f-b8c7b33f9994",
-      "kwargs": {
-        "column": "Gender"
-      },
-      "meta": {},
-      "severity": "critical",
-      "type": "expect_column_to_exist"
-    },
-    {
-      "id": "dee17276-14ab-45bc-8ea4-f8a818a6253b",
+      "id": "353cdd30-3908-48e3-b0a7-45531e3c2f78",
       "kwargs": {
         "column": "family_history_with_overweight",
         "value_set": [
@@ -69,7 +60,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "2fe860b3-e824-4059-b56a-3cd900e50c9d",
+      "id": "c99012b9-68b7-4e08-83c7-d2c6263a7df2",
       "kwargs": {
         "column": "FAVC",
         "value_set": [
@@ -82,7 +73,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "5becd861-85fe-4b0e-b3e0-0d45fc3210ac",
+      "id": "9aea24c3-7a76-4100-bec0-7b80ca0ad2ea",
       "kwargs": {
         "column": "SMOKE",
         "value_set": [
@@ -95,7 +86,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "486925b2-41f9-477b-9ca1-53d1e6159465",
+      "id": "c9007390-49f3-4d98-b5fd-911957d361af",
       "kwargs": {
         "column": "SCC",
         "value_set": [
@@ -108,7 +99,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "50d5086f-65f2-4974-a251-bd3859f519b0",
+      "id": "afab2c77-3006-4cd4-a495-15774a9d9bad",
       "kwargs": {
         "column": "MTRANS_automobile",
         "value_set": [
@@ -121,7 +112,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "ac6923ba-fea2-4304-a8d1-d088ec7b0c36",
+      "id": "e980c3fa-9d12-42fe-a80d-c23e2456459b",
       "kwargs": {
         "column": "MTRANS_bike",
         "value_set": [
@@ -134,7 +125,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "1d927200-dc7d-4c48-97f2-b8eb8f83f137",
+      "id": "9d526f34-4741-425c-83dc-055cad5ce301",
       "kwargs": {
         "column": "MTRANS_motorbike",
         "value_set": [
@@ -147,7 +138,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "886bf58e-7eeb-4359-92aa-ecec6723f1b4",
+      "id": "f79e366f-193c-40d5-a94b-abc3ca0d6a59",
       "kwargs": {
         "column": "MTRANS_walking",
         "value_set": [
@@ -160,7 +151,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "700f1d9a-acad-45c5-9360-acb0ac86dfeb",
+      "id": "1eb47482-b42a-4fe9-b893-67eef1fbbcd1",
       "kwargs": {
         "column": "FCVC",
         "max_value": 3.0,
@@ -171,7 +162,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "254c8abd-b2bc-4e1f-bef2-b5ed6b6edcec",
+      "id": "67a80bad-a57f-4241-9596-14e9fd481a6d",
       "kwargs": {
         "column": "NCP",
         "max_value": 4.0,
@@ -182,7 +173,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "f1651bfe-67e5-465e-86a8-104501d74fbf",
+      "id": "2f4b63ce-e9d3-4423-a8a3-7fb2a9406084",
       "kwargs": {
         "column": "CAEC",
         "max_value": 3.0,
@@ -193,7 +184,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "fbc1f8f6-aef9-41bb-86ca-51ca25fa95d1",
+      "id": "ca13e1a2-a1db-4e92-804c-be70e888e46f",
       "kwargs": {
         "column": "CH2O",
         "max_value": 3.0,
@@ -204,7 +195,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "743d757a-0648-4a10-b98e-78f27c236c1b",
+      "id": "266f7699-4d00-4340-9314-6931d4c2ba32",
       "kwargs": {
         "column": "FAF",
         "max_value": 3.0,
@@ -215,7 +206,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "d072e518-6fb4-460c-8724-c212a396f4cb",
+      "id": "b2047fdb-3b45-435a-b5c8-55476ebce96e",
       "kwargs": {
         "column": "TUE",
         "max_value": 2.0,
@@ -226,7 +217,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "9854f161-452f-4e98-b948-cc861ed029d2",
+      "id": "8d068d3e-8074-4e1f-87bb-641d724c9048",
       "kwargs": {
         "column": "CALC",
         "max_value": 3.0,
@@ -237,7 +228,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "21072e4b-e2b4-45dd-8211-cb687ac98a2a",
+      "id": "001e12bc-14fc-4de3-bd42-cfb8dcf004d5",
       "kwargs": {
         "column": "Obesity",
         "value_set": [
@@ -257,7 +248,7 @@
   ],
   "id": "d40b2565-ab70-4f07-91aa-b0868710947d",
   "meta": {
-    "great_expectations_version": "1.6.4"
+    "great_expectations_version": "1.7.0"
   },
   "name": "obesity_data_suite",
   "notes": null

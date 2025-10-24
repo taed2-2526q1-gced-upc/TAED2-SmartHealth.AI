@@ -82,26 +82,25 @@ data_docs_sites:
 fluent_datasources:
   pandas_obesity:
     type: pandas
-    id: 65dc8b48-9a0d-40bf-81a9-1845d7140779
+    id: 4d267bfd-3292-4bdd-a02d-90979d2813b4
     assets:
       raw_obesity_data:
         type: csv
-        id: d2c26982-c312-4bca-82f1-db6a13f561e2
+        id: ff493235-c8bf-4823-b5a1-76dbcf3eb92c
         batch_definitions:
           raw_batch:
-            id: 513dc0ac-28f1-4262-8643-b5998b875cf5
+            id: a30b49f2-a98f-4f75-b6d7-8279bab1a116
             partitioner:
-        filepath_or_buffer: \Users\steff\OneDrive\Skrivebord\DTU\5. 
-          semester\Data topic\TAED2-SmartHealth.AI\data\raw\obesity.csv
+        filepath_or_buffer: 
+          C:\Users\Renaux\Documents\TAED2-SmartHealth.AI\data\raw\obesity.csv
       clean_obesity_data:
         type: csv
-        id: 245504b9-0af3-4114-a4ee-960ebaed805b
+        id: 06a3f868-cd6b-4864-9296-9e3e12f84607
         batch_definitions:
           clean_batch:
-            id: 7143e2c7-b00b-460b-86ab-128e7e77b08e
+            id: b7235500-edc3-4785-8fee-1bb4cb569c70
             partitioner:
-        filepath_or_buffer: \Users\steff\OneDrive\Skrivebord\DTU\5. 
-          semester\Data 
-          topic\TAED2-SmartHealth.AI\data\interim\obesity_clean.csv
+        filepath_or_buffer: 
+          C:\Users\Renaux\Documents\TAED2-SmartHealth.AI\data\interim\obesity_clean.csv
 analytics_enabled:
 data_context_id: fedf1a76-623f-441a-901e-b997cf51d2ff

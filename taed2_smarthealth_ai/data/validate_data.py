@@ -1,8 +1,7 @@
-# src/data/validate_data.py
 import great_expectations as gx
 from loguru import logger
 
-from data.processed.config import ROOT_DIR
+from taed2_smarthealth_ai.data.config import ROOT_DIR
 from data.processed.gx_context_configuration import CHECKPOINT
 
 context = gx.get_context(mode="file", project_root_dir=ROOT_DIR)

@@ -1,15 +1,15 @@
 {
   "data": {
     "asset": {
-      "id": "d2c26982-c312-4bca-82f1-db6a13f561e2",
+      "id": "ff493235-c8bf-4823-b5a1-76dbcf3eb92c",
       "name": "raw_obesity_data"
     },
     "batch_definition": {
-      "id": "513dc0ac-28f1-4262-8643-b5998b875cf5",
+      "id": "a30b49f2-a98f-4f75-b6d7-8279bab1a116",
       "name": "raw_batch"
     },
     "datasource": {
-      "id": "65dc8b48-9a0d-40bf-81a9-1845d7140779",
+      "id": "4d267bfd-3292-4bdd-a02d-90979d2813b4",
       "name": "pandas_obesity"
     }
   },

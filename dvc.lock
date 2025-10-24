@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python taed2_smarthealth_ai/preprocess_obesity.py
+    cmd: python taed2_smarthealth_ai/data/preprocess_obesity.py
     deps:
     - path: data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
       hash: md5
@@ -11,7 +11,7 @@ stages:
       hash: md5
       md5: 85c1449021c2d37be4527079b6ab16be
       size: 494
-    - path: taed2_smarthealth_ai/preprocess_obesity.py
+    - path: taed2_smarthealth_ai/data/preprocess_obesity.py
       hash: md5
       md5: edb79c5f992df338f2c2bcb453b40772
       size: 4639
@@ -21,7 +21,7 @@ stages:
       md5: f2bb6aec2a2cb99c0d207ba5b7bf8614
       size: 172106
   split:
-    cmd: python taed2_smarthealth_ai/split_obesity.py
+    cmd: python taed2_smarthealth_ai/data/split_obesity.py
     deps:
     - path: data/interim/obesity_clean.csv
       hash: md5
@@ -31,7 +31,7 @@ stages:
       hash: md5
       md5: 85c1449021c2d37be4527079b6ab16be
       size: 494
-    - path: taed2_smarthealth_ai/split_obesity.py
+    - path: taed2_smarthealth_ai/data/split_obesity.py
       hash: md5
       md5: f0e6f2dda3a9cf5fbaf78e4bbb0c704d
       size: 1326

@@ -1,8 +1,4 @@
-# src/config.py
-#from pathlib import Path
-
 #ROOT_DIR = Path(__file__).resolve().parents[2]
-
 #DATA_DIR = ROOT_DIR / "data"
 #RAW_DATA_DIR = DATA_DIR / "raw"
 #INTERIM_DATA_DIR = DATA_DIR / "interim"
@@ -16,14 +12,12 @@ from loguru import logger
 
 load_dotenv()
 
-root = os.getenv("ROOT")
-if root is None:
-    logger.error("PROJ_ROOT environment variable not set. Please set it in your .env file.")
-    raise ValueError(
-        "ROOT environment variable is not set in .env file. Use dot-env-template file to create .env file."
-    )
+proj_root = os.getenv("PROJ_ROOT") or os.getenv("ROOT")
+if not proj_root:
+    proj_root = Path(__file__).resolve().parents[2]
 
-ROOT_DIR = Path(root)
+ROOT_DIR = Path(proj_root).resolve()
+
 logger.info(f"ROOT_DIR path is: {ROOT_DIR}")
 
 DATA_DIR = ROOT_DIR / "data"
@@ -44,15 +38,6 @@ TRAIN_SPLIT = 0.7
 VALIDATION_SPLIT = 0.2
 TEST_SPLIT = 0.1
 
-"""
-HF_TOKEN = os.getenv("HF_TOKEN")
-if HF_TOKEN is None:
-    logger.error("HF_TOKEN environment variable not set. Please set it in your .env file.")
-    raise ValueError(
-        "HF_TOKEN environment variable is not set in .env file. Use dot-env-template file to create .env file."
-    )
-"""
-# If tqdm is installed, configure loguru with tqdm.write
 
 # https://github.com/Delgan/loguru/issues/135
 try:
@@ -63,7 +48,7 @@ try:
 except ModuleNotFoundError:
     pass
 
-# ENV override vinder altid
+# Environment variable (MODEL_PATH) takes priority over the default model path
 _env_model = os.getenv("MODEL_PATH")
 if _env_model:
     MODEL_PATH = Path(_env_model)

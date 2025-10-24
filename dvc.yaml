@@ -1,17 +1,17 @@
 stages:
   preprocess:
-    cmd: python taed2_smarthealth_ai/preprocess_obesity.py
+    cmd: python taed2_smarthealth_ai/data/preprocess_obesity.py
     deps:
-    - taed2_smarthealth_ai/preprocess_obesity.py
+    - taed2_smarthealth_ai/data/preprocess_obesity.py
     - data/raw/ObesityDataSet_raw_and_data_sinthetic.csv
     - params.yaml
     outs:
     - data/interim/obesity_clean.csv
   split:
-    cmd: python taed2_smarthealth_ai/split_obesity.py
+    cmd: python taed2_smarthealth_ai/data/split_obesity.py
     deps:
     - data/interim/obesity_clean.csv
-    - taed2_smarthealth_ai/split_obesity.py
+    - taed2_smarthealth_ai/data/split_obesity.py
     - params.yaml
     outs:
     - data/processed/test.csv

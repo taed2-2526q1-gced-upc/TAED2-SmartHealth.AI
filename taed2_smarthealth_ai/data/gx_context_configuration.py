@@ -1,7 +1,5 @@
-# src/data/gx_context_configuration.py
 import great_expectations as gx
-from data.processed.config import ROOT_DIR, RAW_DATA_DIR, INTERIM_DATA_DIR
-#from data.processed.config import ROOT_DIR, RAW_DATA_DIR, INTERIM_DATA_DIR, PROCESSED_DATA_DIR, DATA_DIR
+from taed2_smarthealth_ai.data.config import ROOT_DIR, RAW_DATA_DIR, INTERIM_DATA_DIR
 
 DATASOURCE_NAME = "pandas_obesity"
 RAW_DATA_ASSET = "raw_obesity_data"
@@ -43,7 +41,6 @@ if __name__ == "__main__":
     # 6. Add your validation rules (you can add more later)
 
     expectation_suite.add_expectation(gx.expectations.ExpectColumnValuesToBeInSet(column="Gender", value_set=[0, 1]))
-
     expectation_suite.add_expectation(gx.expectations.ExpectColumnValuesToBeBetween(column="Age", min_value=5, max_value=120))
     expectation_suite.add_expectation(gx.expectations.ExpectColumnValuesToBeBetween(column="Height", min_value=1.0, max_value=2.5))
     expectation_suite.add_expectation(gx.expectations.ExpectColumnValuesToBeBetween(column="Weight", min_value=30, max_value=300))
@@ -69,8 +66,6 @@ if __name__ == "__main__":
 
     # Target variable (depends on dataset)
     expectation_suite.add_expectation(gx.expectations.ExpectColumnValuesToBeInSet(column="Obesity", value_set=[0,1,2,3,4,5,6]))
-    
-
 
     expectation_suite.save()
 
@@ -81,6 +76,7 @@ if __name__ == "__main__":
     clean_data_validation_definition = gx.ValidationDefinition(
         name=CLEAN_DATA_VALIDATOR, data=clean_data_batch_definition, suite=expectation_suite
     )
+
     context.validation_definitions.add_or_update(raw_data_validation_definition)
     context.validation_definitions.add_or_update(clean_data_validation_definition)
 
@@ -94,6 +90,7 @@ if __name__ == "__main__":
         actions=action_list,
         result_format="SUMMARY",
     )
+    
     context.checkpoints.add_or_update(checkpoint)
 
     print("Great Expectations configuration completed successfully!")

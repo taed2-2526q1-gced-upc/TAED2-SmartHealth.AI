@@ -6,6 +6,8 @@
 
 SmartHealth-AI is a project developed for the TAED2 course at UPC, designed to put MLOps concepts into practice. It combines a Random Forest model that predicts a user’s obesity level from health and lifestyle data with Google gemini that provides personalized health advice. Everything runs through a FastAPI backend, making it easy to integrate into a web application.
 
+The API is available at http://10.4.41.72:8000/ for UPC members until the end of the winter semester.
+
 ## Project Organization
 
 ```

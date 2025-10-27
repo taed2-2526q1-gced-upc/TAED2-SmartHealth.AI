@@ -53,21 +53,27 @@ If misused in a medical context, the model could lead to inappropriate lifestyle
 ## Carbon Footprint
 
 **Training Emissions:**
-- **Total CO2 Emissions:** 0.241 g CO2eq (0.000241 kg CO2eq)
-- **Total Energy Consumed:** 0.00138 kWh
+- **Total CO₂ Emissions:** 0.24 g CO₂eq (0.00024 kg CO₂eq)
+- **Total Energy Consumed:** 0.00142 kWh (1.42 Wh)
 - **Training Duration:** 16.15 seconds (0.0045 hours)
+- **Average per Run:**  
+  - Duration: 1.08 s  
+  - Energy: 0.095 Wh (9.5 × 10⁻⁵ kWh)  
+  - Emissions: 0.016 g CO₂eq
 - **Source:** Measured using CodeCarbon v3.0.7
-- **Training Type:** Fine-tuning
-- **Hardware Used:** 
-  - CPU: AMD Ryzen 7 7435HS (16 cores)
-  - RAM: 15.69 GB
-- **Geographic Location:** Barclona, Spain
-- **Carbon Intensity:** ~174 gCO2eq/kWh (Spain regional grid)
+- **Training Type:** Tabular (Random Forest on CPU)
+- **Hardware Used:**  
+  - CPU: AMD Ryzen 7 7435HS (16 cores)  
+  - RAM: 15.7 GB
+- **Geographic Location:** Barcelona, Spain
+- **Carbon Intensity:** ≈ 174 g CO₂eq / kWh (Spain regional grid)
 - **Cloud Provider:** N/A (local machine training)
 - **PUE:** 1.0 (Power Usage Effectiveness)
 
 **Environmental Context:**
-This training footprint is equivalent to approximately 0.001% of the emissions from a single kilometer driven by an average passenger vehicle, or about 0.000014% of the average American's daily carbon footprint.
+This training footprint is equivalent to approximately 0.001 % of the emissions from driving 1 km in an average passenger vehicle, or ≈ 0.000014 % of the average American’s daily carbon footprint.  
+The model is small, CPU-only, and trained on a modest dataset, resulting in a negligible environmental impact that has been documented for transparency and reproducibility.
+
 
 ### Recommendations
 
@@ -98,11 +104,6 @@ Standard preprocessing steps were applied including:
 #### Testing Data
 
 The model was evaluated on a held-out validation set from the obesity dataset.
-
-#### Metrics
-
-- **Accuracy:** 97.16%
-- **F1 Score (Macro):** 97.09%
 
 ### Results
 

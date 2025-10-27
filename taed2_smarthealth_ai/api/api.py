@@ -348,7 +348,7 @@ def generate_advice_llm(
         - Smoking: {"Yes" if user_inputs.get("SMOKE") == 1 else "No"}
         - Daily water intake: {ch2o_map.get(int(user_inputs.get("CH2O", 2)), "Unknown")}
         - Monitors calorie intake: {"Yes" if user_inputs.get("SCC") == 1 else "No"}
-        - Physical activity frequency: {faf_map.get(int(user_inputs.get("FAF", 0)), "Unknown")}
+        - Physical activity frequency by week: {faf_map.get(int(user_inputs.get("FAF", 0)), "Unknown")}
         - Daily technology usage: {tue_map.get(int(user_inputs.get("TUE", 1)), "Unknown")}
         - Alcohol consumption: {caec_calc_map.get(int(user_inputs.get("CALC", 0)), "Unknown")}
 
@@ -358,7 +358,7 @@ def generate_advice_llm(
         - Full Probability Distribution: {readable_probabilities}
 
         **Important**: Consider the full probability distribution when providing advice. If the person is close to another category (within 5-10% probability), mention preventive measures or warnings about potential risks.
-        For example, if someone is 50% Normal Weight but 42% Overweight Level I, acknowledge they're on the borderline and focus on prevention.
+        But do not say go against the predicted category, just be aware of borderline cases.
 
         Please provide personalized and easy to do health recommendations. 
         Provide as many recommendations as you think are relevant and helpful for this person's situation (typically 2 to 7 recommendations). Each recommendation should be:
@@ -372,7 +372,10 @@ def generate_advice_llm(
         {{
             "advice": ["recommendation 1", "recommendation 2", ...],
             "note": "These are AI-generated suggestions based on your answers to the form. Please consult with healthcare professionals for personalized medical advice."
-        }}"""
+        }}
+        
+        Each recommendation should be an actual advice, not just a general statement about the model's prediction.
+        """
 
         # Call Google Gemini with explicit API key
         model_gemini = genai.GenerativeModel("gemini-2.5-flash")
